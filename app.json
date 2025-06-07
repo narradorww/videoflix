@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "videoflix",
+    "slug": "videoflix",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0ea5e9"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0ea5e9"
+      }
+    },
+    "web": {},
+    "plugins": [
+      "expo-localization",
+      "expo-asset",
+      "expo-font"
+    ],
+    "sdkVersion": "53.0.0"
+  }
+}
