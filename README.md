@@ -1,130 +1,151 @@
-# Expo Template Suite Senior
+# Videoflix - Movie & TV Series Catalog
 
-A professional, production-ready Expo template featuring a comprehensive design system, robust testing suite, and modern development workflow. Built with TypeScript, this template provides everything you need to build scalable React Native applications.
+A React Native application that provides an interactive catalog for discovering movies and TV series. This project is derived from the [Expo Template Suite Senior](https://github.com/narradorww/expo-template-suite-senior) and was created to study and implement the following technical challenge.
 
-## ✨ Features
+## 📋 Technical Challenge: Interactive Movie & TV Series Catalog (React Native Senior)
 
-### 🎨 **Design System**
-- **Complete Theme System** with light/dark mode support
-- **Styled Components** (Text, Button, Card, Container, Stack)
-- **Auto Theme Detection** follows system preferences
-- **TypeScript Integration** for type-safe styling
-- **Consistent Color Palette** with semantic tokens
+### Objective:
+Develop a React Native application that allows users to search for movies and TV series, view details, manage a favorites list, and demonstrates best practices in development, architecture, and performance.
 
-### 🧪 **Testing Suite**
-- **Jest + React Native Testing Library** fully configured
-- **Component Testing** with theme integration
-- **Test Utilities** for easy theme and context testing
-- **Integration Tests** for complex UI scenarios
-- **Coverage Reports** with 70% threshold
+### Context:
+Imagine you're developing a new feature for a streaming app: an interactive catalog where users can discover and save their favorite movies and TV series.
 
-### 🛠 **Development Tools**
-- **TypeScript** with strict configuration
-- **ESLint + Prettier** for code quality
-- **Husky Git Hooks** for pre-commit validation
-- **Path Aliases** for clean imports (`@components`, `@theme`)
-- **Babel Module Resolver** configured
+## 🎯 Functional Requirements
 
-### 📱 **React Native Essentials**
-- **React Navigation** ready-to-use
-- **AsyncStorage** for data persistence
-- **Expo SDK 53** with latest features
-- **Safe Area Context** for proper layouts
-- **Gesture Handler** for smooth interactions
+### 🔍 Search Screen (SearchScreen):
+- Text input field for users to enter search terms (movie/series title)
+- Real-time search with debounce to avoid excessive API calls
+- Display results in a scrollable list (FlatList) showing:
+  - Movie/series poster (image)
+  - Title
+  - Release year
+- Loading indicator (ActivityIndicator) during search
+- Friendly message for no results or API errors
+- Clickable items to view details
+
+### 📱 Details Screen (DetailsScreen):
+- Navigation from search results to detailed view
+- Display comprehensive information:
+  - Featured poster
+  - Title
+  - Release year
+  - Synopsis/Overview
+  - Rating (0-10 scale)
+- Favorite button (heart icon) to add/remove from favorites
+- Visual state indication for favorited items
+
+### ❤️ Favorites Screen (FavoritesScreen):
+- Display all user-favorited movies and TV series
+- Local persistence using AsyncStorage
+- Clickable items leading to DetailsScreen
+- Remove favorites functionality from both screens
+
+### 🧭 Navigation:
+- Tab Navigation between SearchScreen and FavoritesScreen
+- Stack navigation to DetailsScreen from both tabs
+- Implemented using react-navigation
+
+## 🛠 Technical Requirements
+
+### Core Technologies:
+- **Language**: React Native with TypeScript
+- **State Management**: Context API / Redux Toolkit 
+- **Styling**: Styled Components
+- **Navigation**: React Navigation
+
+### Testing:
+- Unit and component tests for main functionalities
+- Jest and React Native Testing Library
+- Test execution documentation
+
+### Code Quality:
+- Clean, organized, readable, and maintainable code
+- SOLID principles where applicable
+- Clear and reusable componentization
+
+### Performance:
+- Optimized long list rendering (FlatList with keyExtractor, memoization)
+- Efficient API call management (avoid unnecessary calls, handle loading/error states)
+
+### Documentation:
+- Detailed setup and run instructions
+- Architecture and library choice explanations
+- Estimated development time
+- Test execution guide
+- Important development decisions
+
+## 🌐 API Integration
+
+**Primary API**: [The Movie Database (TMDB)](https://developer.themoviedb.org/docs/getting-started)
+- Search endpoint: `https://api.themoviedb.org/3/search/multi`
+- Movie details: `https://api.themoviedb.org/3/movie/{movie_id}`
+- TV details: `https://api.themoviedb.org/3/tv/{tv_id}`
+
+**Alternative**: Mock data with consistent structure in `mockData.json`
+
+## 📊 Evaluation Criteria
+
+- **Functionality**: Meets all functional requirements
+- **Code Quality**: Clarity, organization, maintainability, TypeScript usage
+- **Architecture**: Component design, project structure, state management
+- **Testing**: Coverage, quality, and relevance of tests
+- **Performance**: Efficient rendering, async handling, visual feedback
+- **Documentation**: Clear and complete README
+- **React Native Best Practices**: Proper use of components, hooks, ecosystem patterns
+- **Attention to Detail**: Edge case handling, smooth UX
 
 ## 🚀 Quick Start
 
-Create a new project using this template:
+### Prerequisites
+- Node.js (>= 16)
+- npm or yarn
+- Expo CLI
+- Android Studio / Xcode for device testing
+
+### Installation
 
 ```bash
-npx create-expo-app --template expo-template-suite-senior MyApp
-cd MyApp
+# Clone the repository
+git clone <repository-url>
+cd videoflix
+
+# Install dependencies
 npm install
-```
 
-**⚠️ Important: Add your app assets before running**
+# Set up API key (create .env file)
+echo "TMDB_API_KEY=your_api_key_here" > .env
 
-See [ASSETS.md](ASSETS.md) for detailed instructions on required images (icon, splash screen, etc.).
-
-Start developing:
-
-```bash
+# Start the development server
 npm start
 ```
 
-## 📖 Usage Examples
+### Running the App
 
-### Using the Theme System
+```bash
+# Start Expo development server
+npm start
 
-```tsx
-import React from 'react'
-import { Container, Text, Button, Card, Stack } from '@components'
-import { useTheme } from '@context'
+# Run on Android
+npm run android
 
-export default function MyScreen() {
-  const { toggleTheme, themeMode } = useTheme()
-  
-  return (
-    <Container flex padding={4}>
-      <Stack spacing={4}>
-        <Text variant="h1">Welcome!</Text>
-        <Text variant="body">Current theme: {themeMode}</Text>
-        
-        <Card padding={4}>
-          <Stack spacing={3}>
-            <Text variant="h3">Theme Demo</Text>
-            <Button onPress={toggleTheme}>
-              Toggle Theme
-            </Button>
-          </Stack>
-        </Card>
-      </Stack>
-    </Container>
-  )
-}
+# Run on iOS
+npm run ios
+
+# Run on web
+npm run web
 ```
 
-### Using Styled Components
+### Testing
 
-```tsx
-import { Text, Button, Stack } from '@components'
+```bash
+# Run all tests
+npm test
 
-// Text variants
-<Text variant="h1">Main Title</Text>
-<Text variant="body">Regular text</Text>
-<Text variant="caption">Small caption</Text>
+# Run tests in watch mode
+npm run test:watch
 
-// Button variants and sizes
-<Stack direction="row" spacing={2}>
-  <Button variant="primary" size="lg">Primary</Button>
-  <Button variant="outline" size="md">Outline</Button>
-  <Button variant="ghost" size="sm">Ghost</Button>
-</Stack>
-
-// Custom styling
-<Button 
-  variant="primary"
-  loading={isLoading}
-  disabled={isDisabled}
-  style={{ marginTop: 20 }}
->
-  Custom Button
-</Button>
-```
-
-### Testing Components
-
-```tsx
-import { render, screen, fireEvent } from '../utils/test'
-import { Button } from '../components'
-
-test('button handles press correctly', () => {
-  const onPress = jest.fn()
-  render(<Button onPress={onPress}>Click me</Button>)
-  
-  fireEvent.press(screen.getByText('Click me'))
-  expect(onPress).toHaveBeenCalled()
-})
+# Generate coverage report
+npm test -- --coverage
 ```
 
 ## 📁 Project Structure
@@ -132,240 +153,69 @@ test('button handles press correctly', () => {
 ```
 src/
 ├── components/          # Reusable UI components
-│   ├── Button.tsx      # Button with variants and sizes
-│   ├── Text.tsx        # Text with typography variants
-│   ├── Card.tsx        # Card with elevation styles
-│   ├── Container.tsx   # Layout container
-│   ├── Stack.tsx       # Flexbox layout helper
-│   └── __tests__/      # Component tests
-├── context/            # React contexts
-│   ├── ThemeContext.tsx # Theme provider and hooks
-│   └── AppContext.tsx   # Main app context
-├── theme/              # Design system
-│   ├── colors.ts       # Color palette (light/dark)
-│   ├── typography.ts   # Font styles and variants
-│   ├── spacing.ts      # Spacing scale and layouts
-│   ├── shadows.ts      # Shadow/elevation system
-│   └── index.ts        # Theme exports
-├── utils/              # Utilities and helpers
-│   ├── test/           # Testing utilities
-│   └── i18n/           # Internationalization
-├── screens/            # Screen components
+├── screens/            # Screen components (Search, Details, Favorites)
 ├── navigation/         # Navigation configuration
-└── __tests__/          # Integration tests
+├── context/           # State management (Theme, App context)
+├── services/          # API services and data management
+├── hooks/             # Custom hooks
+├── theme/             # Design system (colors, typography, spacing)
+├── utils/             # Utilities and helpers
+└── types/             # TypeScript type definitions
 ```
 
 ## 🎨 Design System
 
-### Theme Usage
+This project leverages a complete design system inherited from Expo Template Suite Senior:
+- **Theme System** with light/dark mode support
+- **Styled Components** with consistent styling
+- **Typography Scale** for text hierarchy
+- **Color Palette** with semantic tokens
+- **Spacing System** for consistent layouts
 
-```tsx
-import { useTheme } from '@context'
+## 🧪 Testing Strategy
 
-function MyComponent() {
-  const { theme, themeMode, toggleTheme } = useTheme()
-  
-  const dynamicStyle = {
-    backgroundColor: theme.colors.surface,
-    padding: theme.spacing[4],
-    borderRadius: theme.borderRadius.lg,
-    ...theme.shadows.md
-  }
-  
-  return (
-    <View style={dynamicStyle}>
-      <Text style={{ color: theme.colors.text.primary }}>
-        Current theme: {themeMode}
-      </Text>
-    </View>
-  )
-}
-```
+- **Unit Tests**: Individual component and function testing
+- **Integration Tests**: Screen flow and user interaction testing
+- **Component Tests**: UI component behavior and styling
+- **API Tests**: Service layer and data handling
 
-### Color System
+## 📈 Performance Optimizations
 
-```tsx
-// Primary colors (blue scale)
-theme.colors.primary[50]   // Very light
-theme.colors.primary[500]  // Main color
-theme.colors.primary[900]  // Very dark
+- **FlatList Optimization**: Proper keyExtractor and item layout
+- **Image Caching**: Efficient poster loading and caching
+- **Search Debouncing**: Reduced API calls during typing
+- **Memoization**: React.memo for expensive components
+- **State Management**: Efficient data flow and updates
 
-// Semantic colors
-theme.colors.success[500]  // Green
-theme.colors.warning[500]  // Orange  
-theme.colors.error[500]    // Red
+## 🔄 State Management Choice
 
-// Text colors
-theme.colors.text.primary     // Main text
-theme.colors.text.secondary   // Muted text
-theme.colors.text.disabled    // Disabled text
-```
+[To be documented based on implementation choice]
 
-### Typography Scale
+## ⏱️ Development Time Estimation
 
-```tsx
-// Headings
-<Text variant="h1">48px Bold</Text>
-<Text variant="h2">36px Bold</Text>
-<Text variant="h3">30px SemiBold</Text>
+[To be documented during development]
 
-// Body text
-<Text variant="body">16px Regular</Text>
-<Text variant="bodyLarge">18px Regular</Text>
-<Text variant="bodySmall">14px Regular</Text>
+## 📝 Development Notes
 
-// Special
-<Text variant="button">16px Medium</Text>
-<Text variant="caption">12px Regular</Text>
-```
+[Key decisions and observations during development]
 
-## 🧪 Testing
+## 🌟 Bonus Features Considered
 
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Watch mode for development
-npm run test:watch
-
-# Generate coverage report
-npm test -- --coverage
-
-# Run specific test file
-npm test Button.test.tsx
-```
-
-### Test Utilities
-
-```tsx
-import { render, screen } from '../utils/test'
-import { expectToHaveThemeColor } from '../utils/test'
-
-// Render with theme context
-render(<MyComponent />)
-
-// Test theme integration
-expectToHaveThemeColor(element, 'backgroundColor', 'surface')
-
-// Test with specific theme mode
-render(<MyComponent />, { themeMode: 'dark' })
-```
-
-### Writing Component Tests
-
-```tsx
-import { render, screen, fireEvent } from '../../utils/test'
-import { Button } from '../Button'
-
-describe('Button', () => {
-  it('applies primary variant styles', () => {
-    render(<Button variant="primary" testID="button">Test</Button>)
-    
-    const button = screen.getByTestId('button')
-    expect(button.props.style).toEqual(
-      expect.objectContaining({
-        backgroundColor: '#0ea5e9' // primary.500
-      })
-    )
-  })
-})
-```
-
-## 🛠 Available Scripts
-
-| Script | Description |
-|--------|-------------|
-| `npm start` | Start Expo development server |
-| `npm run android` | Run on Android device/emulator |
-| `npm run ios` | Run on iOS device/simulator |
-| `npm run web` | Run on web browser |
-| `npm test` | Run test suite |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Fix ESLint issues |
-| `npm run type-check` | Run TypeScript type checking |
-| `npm run format` | Format code with Prettier |
-| `npm run ci` | Run all checks (lint + type + test) |
-
-## 🔧 Configuration
-
-### TypeScript Paths
-
-The template includes pre-configured path aliases:
-
-```tsx
-// Instead of relative imports
-import { Button } from '../../../components/Button'
-
-// Use clean path aliases
-import { Button } from '@components'
-import { useTheme } from '@context'
-import { lightTheme } from '@theme'
-import { formatDate } from '@utils'
-```
-
-### Jest Configuration
-
-- **Coverage threshold**: 70% for branches, functions, lines, statements
-- **Path mapping**: Supports all TypeScript path aliases
-- **Mock setup**: Comprehensive mocks for Expo, React Native, and AsyncStorage
-- **Test utilities**: Custom render functions with theme context
-
-### ESLint & Prettier
-
-- **TypeScript support**: Full TypeScript ESLint integration
-- **React Native rules**: Optimized for React Native development
-- **Import organization**: Automatic import sorting and grouping
-- **Prettier integration**: Seamless code formatting
-
-## 🌙 Dark Mode
-
-The template includes a complete dark mode implementation:
-
-- **Automatic detection** of system preference
-- **Manual toggle** with persistence
-- **Smooth transitions** between themes
-- **Complete color coverage** for all components
-
-```tsx
-import { useTheme } from '@context'
-
-function ThemeToggle() {
-  const { themeMode, toggleTheme, setSystemMode } = useTheme()
-  
-  return (
-    <Stack spacing={2}>
-      <Button onPress={toggleTheme}>
-        Switch to {themeMode === 'light' ? 'dark' : 'light'} mode
-      </Button>
-      <Button onPress={() => setSystemMode(true)}>
-        Use system theme
-      </Button>
-    </Stack>
-  )
-}
-```
-
-## 🚀 Getting Started Tips
-
-1. **Explore the components**: Check `src/components/` for available UI elements
-2. **Customize the theme**: Modify colors and spacing in `src/theme/`
-3. **Add your screens**: Create new screens in `src/screens/`
-4. **Write tests**: Use the testing utilities in `src/utils/test/`
-5. **Follow the structure**: Maintain the organized folder structure
+- Search result pagination
+- API response caching strategies
+- Accessibility implementation
+- Architecture scalability for larger teams
+- React Native New Architecture considerations (Fabric/TurboModules)
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please:
+This is a study project, but contributions and suggestions are welcome:
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Add tests for new features
-5. Run `npm run ci` to ensure all checks pass
-6. Submit a pull request
+5. Submit a pull request
 
 ## 📄 License
 
@@ -373,16 +223,4 @@ This project is licensed under the GPL-3.0-only License. See the [LICENSE](LICEN
 
 ---
 
-## 🙋‍♂️ Support
-
-If you encounter any issues or have questions:
-
-1. Check the [GitHub Issues](https://github.com/narradorww/expo-template-suite-senior/issues)
-2. Review the documentation above
-3. Create a new issue with detailed information
-
-**Happy coding!** 🎉
-
----
-
-_Built with ❤️ for the React Native community. This template provides a solid foundation for building production-ready mobile applications with modern development practices._
+**Note**: This project is based on [Expo Template Suite Senior](https://github.com/narradorww/expo-template-suite-senior) and serves as a practical implementation of advanced React Native development concepts and best practices.
